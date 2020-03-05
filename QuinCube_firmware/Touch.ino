@@ -3,12 +3,15 @@ bool touchChecked[SENS_AM];
 
 void updateTouch() {
 	for (int i = 0; i < SENS_AM; i++) touchChecked[i] = false;
+	leftTouchAm = 0;
+	frontTouchAm = 0;
+	rightTouchAm = 0;
 
 
 	for (int i = 0; i < MAX_TOUCH_AM; i++) {
 		if (!touches[i].active) continue;
 
-		
+
 		int pos = touches[i].pos;
 		float newPos = 0;
 		float newPow = 0;
@@ -34,9 +37,14 @@ void updateTouch() {
 		if (newPow != 0) {
 			newPos /= newPow;
 			touches[i].newPos(newPos);
-			touches[i].pow = touches[i].pow*0.5 + newPow*0.5;
+			touches[i].pow = touches[i].pow * 0.5 + newPow * 0.5;
 
-			if(findTouchOnPos(&touches[i])) touches[i].active = false;
+			if (findTouchOnPos(&touches[i])) touches[i].active = false;
+			else {
+				if (newPos < 12) leftTouchAm++;
+				else if (newPos < 24) frontTouchAm++;
+				else rightTouchAm++;
+			}
 		}
 		else touches[i].active = false;
 	}
@@ -47,7 +55,7 @@ void updateTouch() {
 	Touch* prevTouch = NULL;
 
 	for (int i = 0; i < SENS_AM; i++) {
-		if (touchVals[i] > 5 && !touchChecked[i]) {
+		if (touchVals[i] > 10 && !touchChecked[i]) {
 			newPos += i * touchVals[i];
 			newPow += touchVals[i];
 		}

@@ -24,6 +24,8 @@ public:
 	void init(float _size, float _spd, float _hue);
 	void move(float dt);
 	void translate(float x, float y, float z);
+	void rotate(float r);
+	void scale(float s);
 	void render();
 
 
@@ -31,6 +33,7 @@ private:
 	float xPos, yPos, zPos, size, xSpd, ySpd, zSpd;
 	Color c;
 	float hue;
+	void reset(int x, int y, int z);
 };
 
 #endif

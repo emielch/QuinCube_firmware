@@ -8,6 +8,9 @@
 #define SENS_AM 36
 #define MAX_TOUCH_AM 20
 Touch touches[MAX_TOUCH_AM];
+int leftTouchAm = 0;
+int frontTouchAm = 0;
+int rightTouchAm = 0;
 
 
 const int ledsPerStrip = 125;

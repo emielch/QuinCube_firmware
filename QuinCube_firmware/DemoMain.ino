@@ -30,6 +30,7 @@ void resetDemo() {
 }
 
 extern float touchVals[36];
+float xSpd, ySpd, zSpd, rSpd = 0;
 
 void demoLoop()
 {
@@ -44,17 +45,48 @@ void demoLoop()
 	int touchLedLen = 287;
 	float touchsegLen = touchLedLen / 36.;
 
+	if (frontTouchAm == 2) {
+		float spd = 0;
+		float touch1Pos = 0;
+		float touch1Dist = 0;
+		float touch2Pos = 0;
+		float touch2Dist = 0;
+		int t = 1;
+		for (uint8_t j = 0; j < MAX_TOUCH_AM; j++) {
+			if (!touches[j].active) continue;
+			if (touches[j].pos >= 12 && touches[j].pos < 24) {
+				if (t == 1) {
+					touch1Pos = touches[j].pos;
+					touch1Dist = touches[j].movedDist();
+				}
+				else {
+					touch2Pos = touches[j].pos;
+					touch2Dist = touches[j].movedDist();
+				}
+				t = -1;
+			}
+		}
+		if (touch1Pos > touch2Pos) spd = touch1Dist - touch2Dist;
+		else spd = touch2Dist - touch1Dist;
+		scaleOrbs(spd * 0.1 + 1);
+	}
+
 	for (uint8_t j = 0; j < MAX_TOUCH_AM; j++) {
 		if (!touches[j].active) continue;
 
 		float pos = touches[j].pos;
+		float spd = touches[j].movedDist() * 2;
+
 
 		if (pos < 12)
-			translateOrbs(0, 0, -touches[j].movedDist() * 2);
-		if (pos < 24)
-			translateOrbs(touches[j].movedDist() * 2, 0, 0);
+			if (leftTouchAm == 2) ySpd = spd;
+			else zSpd = -spd;
+		else if (pos < 24) {
+			if (frontTouchAm != 2)
+				xSpd = spd;
+		}
 		else
-			translateOrbs(0, touches[j].movedDist() * 2, 0);
+			rSpd = spd;
 
 
 		float spread = touches[j].pow * 0.5;
@@ -74,6 +106,14 @@ void demoLoop()
 		}
 	}
 
+
+	translateOrbs(xSpd, ySpd, zSpd);
+	if (abs(rSpd) > 0.01) rotateOrbs(rSpd * 0.1);
+
+	xSpd *= 0.97;
+	ySpd *= 0.97;
+	zSpd *= 0.97;
+	rSpd *= 0.97;
 
 
 	show_ledLib();
@@ -97,6 +137,18 @@ void demoLoop()
 void translateOrbs(float x, float y, float z) {
 	for (int i = 0; i < orbAm; i++) {
 		orbs[i].translate(x, y, z);
+	}
+}
+
+void rotateOrbs(float r) {
+	for (int i = 0; i < orbAm; i++) {
+		orbs[i].rotate(r);
+	}
+}
+
+void scaleOrbs(float s) {
+	for (int i = 0; i < orbAm; i++) {
+		orbs[i].scale(s);
 	}
 }
 
