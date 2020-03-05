@@ -69,6 +69,13 @@ void Orb::move(float dt)
 	}
 }
 
+void Orb::translate(float x, float y, float z)
+{
+	xPos += x;
+	yPos += y;
+	zPos += z;
+}
+
 
 void Orb::render()
 {  

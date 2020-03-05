@@ -23,6 +23,7 @@ public:
 	Orb();
 	void init(float _size, float _spd, float _hue);
 	void move(float dt);
+	void translate(float x, float y, float z);
 	void render();
 
 

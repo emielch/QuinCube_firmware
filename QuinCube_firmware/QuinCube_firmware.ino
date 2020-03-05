@@ -3,6 +3,12 @@
 #include "Orb.h"
 #include <Colore.h>
 #include <MultiWS2811.h>
+#include "Touch.h"
+
+#define SENS_AM 36
+#define MAX_TOUCH_AM 20
+Touch touches[MAX_TOUCH_AM];
+
 
 const int ledsPerStrip = 125;
 
@@ -29,7 +35,7 @@ int touchSampleCounter = 0;
 void setup()
 {
   sinceNewFrame = demoDelay + 1;
-  touchSetup();
+  sensSetup();
   demoSetup();
   Serial.setTimeout(50);
   leds.begin();
@@ -41,7 +47,6 @@ void loop() {
     if (!demoRunning) {
       resetDemo();
       demoRunning = true;
-      elapsedMillis sinceDemoStart = 0;
     }
     demoLoop();
   } else if (sinceNewFrame > screenSaverDelay) {
@@ -54,7 +59,7 @@ void loop() {
 }
 
 void renderInterrupt() {
-  touchUpdate();
+  sensUpdate();
 }
 
 
