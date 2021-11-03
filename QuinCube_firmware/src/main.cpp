@@ -3,10 +3,9 @@
 
 #include "DemoManager.h"
 #include "LedManager.h"
-#include "MPR121_Manager.h"
-#include "TouchbarManager.h"
-#include "Orbs_animation/OrbsManager.h"
 
+#include "SerialStreamManager.h"
+#include "Touch/MPR121_Manager.h"
 
 
 void renderInterrupt() {
@@ -24,17 +23,14 @@ void exciteRandomizer() {
 void setup() {
   //while(!Serial){}
   exciteRandomizer();
+  serialStreamManager.init();
   mpr121Manager.init();
-  touchbarManager.init();
   ledManager.init();
   demoManager.init(&renderInterrupt);
-  orbsManager.init(&renderInterrupt);
+  
 }
 
 void loop() {
-  //mpr121Manager.update();
-  touchbarManager.update();
-  //demoManager.update();
-  orbsManager.update();
-  ledManager.update();
+  serialStreamManager.update();
+  demoManager.update();
 }

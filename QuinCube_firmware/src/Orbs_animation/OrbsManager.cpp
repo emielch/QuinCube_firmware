@@ -1,5 +1,7 @@
 #include "OrbsManager.h"
 
+#include "Touch/TouchbarManager.h"
+
 void OrbsManager::init(void (*_renderInterrupt)()) {
   renderInterrupt = _renderInterrupt;
   lastCalc = micros();
@@ -9,6 +11,7 @@ void OrbsManager::init(void (*_renderInterrupt)()) {
 }
 
 void OrbsManager::update() {
+  touchInput();
   for (int i = 0; i < orbAm; i++) {
     renderInterrupt();
     orbs[i].move(dt);
@@ -23,6 +26,18 @@ void OrbsManager::update() {
   }
 }
 
+void OrbsManager::touchInput() {
+  Vector3 spd = touchbarManager.getSpd();
+  float r = touchbarManager.getRotationSpd();
+  float s = touchbarManager.getScaleSpd();
+
+  for (int i = 0; i < orbAm; i++) {
+    orbs[i].translate(spd);
+    orbs[i].rotate(r);
+    orbs[i].scale(s);
+  }
+}
+
 void OrbsManager::calcDt() {
   uint32_t currTime = micros();
   dt = (currTime - lastCalc) / 1000000.;  // assume one frame per second
@@ -32,6 +47,5 @@ void OrbsManager::calcDt() {
 float OrbsManager::getFPS() {
   return 1 / dt;
 }
-
 
 OrbsManager orbsManager;

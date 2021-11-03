@@ -4,8 +4,8 @@
 
 void MPR121_Manager::init() {
   pinMode(18, OUTPUT);
-  digitalWrite(18, LOW);
-  Wire.begin(I2C_MASTER, 0, 0, 19, 18, I2C_PULLUP_EXT, 400000, I2C_OP_MODE_ISR);
+  digitalWrite(18, HIGH);
+  Wire.begin(I2C_MASTER, 0, 0, 19, 18, I2C_PULLUP_EXT, 100000, I2C_OP_MODE_ISR);
 
   for (int i = 0; i < SENSOR_AM; i++) {
     writeRegister(sensorAddr[i], MPR121_SOFTRESET, 0x63);
@@ -33,7 +33,7 @@ void MPR121_Manager::update() {
 void MPR121_Manager::processSensData() {
   loopCounter++;
 
-  for (uint8_t i = 0; i < EL_AM; i++) {
+  for (uint8_t i = 0; i < ELEC_AM; i++) {
     if (touchBaseline[i] < touchRaw[i] - 400)
       touchBaseline[i] = touchRaw[i];
     else if (touchRaw[i] > touchBaseline[i] - 5)
@@ -49,11 +49,10 @@ void MPR121_Manager::processSensData() {
 
   if (sincePrint > 1000) {
     sincePrint = 0;
-
-    for (uint8_t i = 0; i < EL_AM; i++) {
-      Serial.print(touchVals[i]);
-      Serial.print('\t');
-    }
+    // for (uint8_t i = 0; i < ELEC_AM; i++) {
+    //   Serial.print(touchVals[i]);
+    //   Serial.print('\t');
+    // }
     Serial.println(loopCounter);
     Serial.println();
     loopCounter = 0;

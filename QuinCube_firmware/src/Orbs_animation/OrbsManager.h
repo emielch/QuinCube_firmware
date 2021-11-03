@@ -11,6 +11,7 @@ class OrbsManager {
   void update();
 
  private:
+  void touchInput();
   const static int orbAm = 20;
   Orb orbs[orbAm];
   elapsedMillis sincePrint = 0;

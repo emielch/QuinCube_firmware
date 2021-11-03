@@ -8,10 +8,13 @@ class DemoManager {
  public:
   void init(void (*_renderInterrupt)());
   void update();
+  void enableDemo();
+  void disableDemo();
 
  private:
-  float pos = 0;
-  float spd = 10;
+  void startDemo();
+  void stopDemo();
+  bool demoRunning, demoEnabled;
   elapsedMillis sinceUpdate;
   void (*renderInterrupt)();
 };

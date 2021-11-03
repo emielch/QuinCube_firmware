@@ -16,9 +16,9 @@ class MPR121_Manager {
   byte sensorAddr[SENSOR_AM] = {0x5A, 0x5B, 0x5C};
   byte currSensor = 0;  // the sensor that is currently being read. (we will read each sensor sequentially)
 
-  float touchVals[EL_AM];
-  float touchBaseline[EL_AM];
-  int touchRaw[EL_AM];
+  float touchVals[ELEC_AM];
+  float touchBaseline[ELEC_AM];
+  int touchRaw[ELEC_AM];
 
   void processSensData();
   bool readSensData(byte addr);

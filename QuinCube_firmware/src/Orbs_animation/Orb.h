@@ -1,30 +1,13 @@
 #pragma once
 #include <Color.h>
 
-struct Vector3 {
-  float x, y, z;
-  void add(Vector3 v) {
-    x += v.x;
-    y += v.y;
-    z += v.z;
-  }
-  void mult(Vector3 v) {
-    x *= v.x;
-    y *= v.y;
-    z *= v.z;
-  }
-  void mult(float s) {
-    x *= s;
-    y *= s;
-    z *= s;
-  }
-};
+#include "Vector3.h"
 
 class Orb {
  public:
   void init(float _size, float _spd, float _hue);
   void move(float dt);
-  void translate(float x, float y, float z);
+  void translate(Vector3 spd);
   void rotate(float r);
   void scale(float s);
   void render();

@@ -49,8 +49,8 @@ void Orb::reset(float x, float y, float z) {
   pos = {x, y, z};
 }
 
-void Orb::translate(float x, float y, float z) {
-  pos.add({x, y, z});
+void Orb::translate(Vector3 spd) {
+  pos.add(spd);
 }
 
 void Orb::rotate(float r) {
@@ -62,6 +62,7 @@ void Orb::rotate(float r) {
 }
 
 void Orb::scale(float s) {
+  s+=1;
   pos.x = (pos.x - CUBE_SIZE * 0.5) * s + CUBE_SIZE * 0.5;
   pos.z = (pos.z - CUBE_SIZE * 0.5) * s + CUBE_SIZE * 0.5;
   size *= s;
