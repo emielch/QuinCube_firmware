@@ -23,6 +23,8 @@ class LEDManager {
 
   void setPixel(int id, byte r, byte g, byte b);
   void setPixel(int id, Color c);
+  void setPixel(int id, int c);
+
   Color getPixel(int id);
 
  private:

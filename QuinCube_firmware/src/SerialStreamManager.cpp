@@ -32,6 +32,14 @@ void SerialStreamManager::update() {
     demoManager.enableDemo();
   } else if (startChar == 'x') {
     demoManager.disableDemo();
+  } else if (startChar == 'r') {
+    demoManager.switchAnim(Rainbow);
+  } else if (startChar == 'o') {
+    demoManager.switchAnim(Orbs);
+  } else if (startChar == '=') {
+    demoManager.adjBri(1);
+  } else if (startChar == '-') {
+    demoManager.adjBri(-1);
   } else if (startChar >= 0) {
     // discard unknown characters
   }

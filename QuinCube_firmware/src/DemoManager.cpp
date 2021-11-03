@@ -2,15 +2,17 @@
 
 #include "LEDManager.h"
 #include "Orbs_animation/OrbsManager.h"
+#include "Rainbow_animation/RainbowManager.h"
 #include "SerialStreamManager.h"
 #include "Touch/TouchbarManager.h"
 
 void DemoManager::init(void (*_renderInterrupt)()) {
-  renderInterrupt = _renderInterrupt;  
+  renderInterrupt = _renderInterrupt;
   touchbarManager.init();
   orbsManager.init(renderInterrupt);
+  rainbowManager.init(renderInterrupt, brightness);
+  currAnim = Orbs;
   enableDemo();
-  sinceUpdate = 0;
 }
 
 void DemoManager::update() {
@@ -23,13 +25,26 @@ void DemoManager::update() {
     if (!demoRunning && demoEnabled) {
       startDemo();
     }
-    if (demoRunning){
+    if (demoRunning) {
       touchbarManager.update();
-      orbsManager.update();
+      if (currAnim == Orbs)
+        orbsManager.update();
+      else if (currAnim == Rainbow)
+        rainbowManager.update();
     }
   }
 
   ledManager.update();
+}
+
+void DemoManager::switchAnim(DemoAnim d) {
+  currAnim = d;
+}
+
+void DemoManager::adjBri(int v) {
+  brightness += v * brightness * 0.2;
+  Serial.println(brightness);
+  rainbowManager.init(renderInterrupt, constrain(brightness, 0, 100));
 }
 
 void DemoManager::enableDemo() {

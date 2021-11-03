@@ -14,7 +14,7 @@ void LEDManager::update() {
   resetLEDs();
 }
 
-void LEDManager::show(){
+void LEDManager::show() {
   leds->show();
 }
 
@@ -40,6 +40,10 @@ Color LEDManager::getPixelTB(int pos) {
 
 void LEDManager::setPixel(int id, Color c) {
   setPixel(id, c.red(), c.green(), c.blue());
+}
+
+void LEDManager::setPixel(int id, int c) {
+  leds->setPixel(id, c);
 }
 
 void LEDManager::setPixel(int id, byte r, byte g, byte b) {
