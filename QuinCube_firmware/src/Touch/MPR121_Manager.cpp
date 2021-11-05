@@ -9,9 +9,9 @@ void MPR121_Manager::init() {
 
   for (int i = 0; i < SENSOR_AM; i++) {
     writeRegister(sensorAddr[i], MPR121_SOFTRESET, 0x63);
-    writeRegister(sensorAddr[i], MPR121_CONFIG1, 0x3F);
+    writeRegister(sensorAddr[i], MPR121_CONFIG1, 0xFF);
     writeRegister(sensorAddr[i], MPR121_CONFIG2, 0x38);
-    writeRegister(sensorAddr[i], MPR121_ECR, 0x8C);
+    writeRegister(sensorAddr[i], MPR121_ECR, 0x4C);
   }
 }
 
