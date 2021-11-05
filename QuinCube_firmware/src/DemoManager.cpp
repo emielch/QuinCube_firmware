@@ -5,13 +5,15 @@
 #include "Rainbow_animation/RainbowManager.h"
 #include "SerialStreamManager.h"
 #include "Touch/TouchbarManager.h"
+#include "Sine_animation/SineManager.h"
 
 void DemoManager::init(void (*_renderInterrupt)()) {
   renderInterrupt = _renderInterrupt;
   touchbarManager.init();
   orbsManager.init(renderInterrupt);
+  sineManager.init(renderInterrupt);
   rainbowManager.init(renderInterrupt, brightness);
-  currAnim = Orbs;
+  currAnim = Sine;
   enableDemo();
 }
 
@@ -31,6 +33,8 @@ void DemoManager::update() {
         orbsManager.update();
       else if (currAnim == Rainbow)
         rainbowManager.update();
+      else if (currAnim == Sine)
+        sineManager.update();
     }
   }
 

@@ -36,6 +36,8 @@ void SerialStreamManager::update() {
     demoManager.switchAnim(Rainbow);
   } else if (startChar == 'o') {
     demoManager.switchAnim(Orbs);
+  } else if (startChar == 's') {
+    demoManager.switchAnim(Sine);
   } else if (startChar == '=') {
     demoManager.adjBri(1);
   } else if (startChar == '-') {

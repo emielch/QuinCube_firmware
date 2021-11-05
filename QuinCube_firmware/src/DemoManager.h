@@ -6,7 +6,8 @@
 
 enum DemoAnim {
   Orbs,
-  Rainbow
+  Rainbow,
+  Sine
 };
 
 class DemoManager {

@@ -12,6 +12,13 @@ void LEDManager::init() {
 void LEDManager::update() {
   leds->show();
   resetLEDs();
+  
+  calcDt();
+  if (sincePrint > 1000) {
+    Serial.print("FPS: ");
+    Serial.println(getFPS());
+    sincePrint = 0;
+  }
 }
 
 void LEDManager::show() {
@@ -82,6 +89,16 @@ int LEDManager::getTbLedId(int pos) {
 
 void LEDManager::resetLEDs() {
   memset(drawingMemory, 0, bufsize);
+}
+
+
+void LEDManager::calcDt() {
+  dt = sinceDtCalc / 1000000.;  // assume one frame per second
+  sinceDtCalc = 0;
+}
+
+float LEDManager::getFPS() {
+  return 1 / dt;
 }
 
 LEDManager ledManager;

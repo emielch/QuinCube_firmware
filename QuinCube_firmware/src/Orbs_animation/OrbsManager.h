@@ -14,11 +14,7 @@ class OrbsManager {
   void touchInput();
   const static int orbAm = 20;
   Orb orbs[orbAm];
-  elapsedMillis sincePrint = 0;
-  float dt;
-  void calcDt();
-  float getFPS();
-  uint32_t lastCalc;  // variable to keep track of the loops per second
+
   void (*renderInterrupt)();
 };
 

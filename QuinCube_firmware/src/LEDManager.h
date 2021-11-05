@@ -27,12 +27,20 @@ class LEDManager {
 
   Color getPixel(int id);
 
+  float getDt() { return dt; }
+
  private:
   MultiWS2811 *leds;
   int getVoxelLedId(byte x, byte y, byte z);
   int getTbLedId(int pos);
   uint32_t bufsize = LEDS_PER_CHANNEL * 384;
   void resetLEDs();
+
+  elapsedMillis sincePrint = 0;
+  float dt;
+  void calcDt();
+  float getFPS();
+  elapsedMicros sinceDtCalc = 0;  // variable to keep track of the loops per second
 };
 
 extern LEDManager ledManager;
