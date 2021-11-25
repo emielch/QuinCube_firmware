@@ -18,6 +18,7 @@ void TouchbarManager::update() {
 
 void TouchbarManager::updateTouches() {
   bool elecChecked[ELEC_AM] = {false};  // to keep track of which electrodes are checked already
+  touchAm = 0;
 
   ////// update any existing touches
   for (int i = 0; i < MAX_TOUCH_AM; i++) {
@@ -44,6 +45,7 @@ void TouchbarManager::updateTouches() {
       newPos /= newPow;  // calculate the avg weighted position
       touches[i].newPos(newPos);
       touches[i].pow = touches[i].pow * 0.5 + newPow * 0.5;  // smoothly transition the touch's power to its new current power
+      touchAm++;
 
       if (findTouchOnPos(&touches[i]))  // deactivate if any other touch happens to exist on this touch's new position  (maybe implement a "merging" animation?)
         touches[i].active = false;
@@ -61,9 +63,14 @@ void TouchbarManager::updateTouches() {
       if (newPow != 0) {
         newPos /= newPow;  // take the average position, weighted by power
         createTouch(newPos, newPow);
+        touchAm++;
       }
       newPos = newPow = 0;
     }
+  }
+
+  if (touchAm > 0) {
+    sinceTouched = 0;
   }
 }
 

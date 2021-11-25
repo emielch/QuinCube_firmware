@@ -13,6 +13,8 @@ class TouchbarManager {
   Vector3 getSpd() { return spd; }
   float getRotationSpd() { return rotSpd; }
   float getScaleSpd() { return scaleSpd; }
+  int getTouchAm() { return touchAm; }
+  int getSinceTouched() { return sinceTouched; }
 
  private:
   void updateTouches();
@@ -20,6 +22,8 @@ class TouchbarManager {
   Touch* createTouch(float pos, float pow);
   Touch* findTouchOnPos(Touch* t);
   Touch touches[MAX_TOUCH_AM];
+  int touchAm = 0;
+  elapsedMillis sinceTouched = 0;
   float hue = 0;
 
   void updateMovementValues();
