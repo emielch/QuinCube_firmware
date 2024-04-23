@@ -28,6 +28,8 @@ void setup() {
   touchbarManager.init();
   ledManager.init();
   demoManager.init(&renderInterrupt);
+
+  //Teensy3Clock.set(1713889270);  // set the time manually, auto set during compile time doesn't seem to work...
 }
 
 void loop() {
