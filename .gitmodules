@@ -1,3 +1,6 @@
-[submodule "lib/MultiWS2811"]
-	path = lib/MultiWS2811
-	url = git@github.com:emielch/MultiWS2811.git
+[submodule "src/CubeOS"]
+	path = src/CubeOS
+	url = git@github.com:emielch/CubeOS.git
+[submodule "lib/ShiftWS2811"]
+	path = lib/ShiftWS2811
+	url = git@github.com:emielch/ShiftWS2811.git
