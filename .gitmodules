@@ -1,5 +1,5 @@
 [submodule "src/CubeOS"]
-	path = src/CubeOS
+	path = lib/CubeOS
 	url = git@github.com:emielch/CubeOS.git
 [submodule "lib/ShiftWS2811"]
 	path = lib/ShiftWS2811

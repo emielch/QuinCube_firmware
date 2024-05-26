@@ -1,19 +1,11 @@
 #include <Arduino.h>
 
-#include "CubeOS\Audio\AudioManager.h"
-#include "CubeOS\Demo\DemoManager.h"
-#include "CubeOS\Driver.h"
-#include "CubeOS\SerialStreamManager.h"
+#include "CubeOS\CubeOS.h"
 
 void setup() {
-  cube->init();
-  serialStreamManager.init();
-  audioManager.init();
-  demoManager.init();
+  cubeOS.init();
 }
 
 void loop() {
-  serialStreamManager.update();
-  audioManager.update();
-  demoManager.update();
+  cubeOS.update();
 }
