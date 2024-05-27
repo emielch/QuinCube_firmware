@@ -4,6 +4,7 @@
 
 void setup() {
   cubeOS.init();
+  demoManager.setBri(100, true);
 }
 
 void loop() {
