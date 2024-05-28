@@ -1,12 +1,12 @@
 #include <Arduino.h>
 
 #include "CubeOS/CubeOS.h"
-#include "Time/TimeManager.h"
 
 void setup() {
   cubeOS.init();
   demoManager.setBri(100, true);
-  timeManager.init(&demoManager.enableDemo, &demoManager.disableDemo);
+  timeManager.setOnTime(8.5 * 60 * 60);
+  timeManager.setOffTime(17.5 * 60 * 60);
 }
 
 void loop() {
