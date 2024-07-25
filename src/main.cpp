@@ -6,9 +6,11 @@
 void setup() {
   cubeOS.init();
   mpr121Manager.init();
-  demoManager.setBri(100, true);
+  demoManager.setBri(75, true);
   timeManager.setOnTime(8.5 * 60 * 60);
-  timeManager.setOffTime(17.5 * 60 * 60);
+  timeManager.setOffTime(18 * 60 * 60);
+  timeManager.setOnDay(6, false);  // off on saturday
+  timeManager.setOnDay(0, false);  // off on saturday
 }
 
 void loop() {
