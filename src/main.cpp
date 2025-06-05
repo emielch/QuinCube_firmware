@@ -13,7 +13,7 @@ void setup() {
   
   cubeOS.setBri(75);
   timeManager.setOnTime(8,30,0);
-  timeManager.setOffTime(180,0,0);
+  timeManager.setOffTime(18,0,0);
   timeManager.setOnDay(6, false);  // off on saturday
   timeManager.setOnDay(0, false);  // off on saturday
 }
